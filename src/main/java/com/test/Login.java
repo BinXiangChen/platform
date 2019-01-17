@@ -1,6 +1,8 @@
 package com.test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +36,24 @@ public class Login extends HttpServlet {
 			/*
 			 * 这样直接跳转，在加载css资源的时候，会加上IP，需要把这些静态资源放到服务器
 			 */
-			request.getRequestDispatcher("static/homepage.html").forward(request, response);
+			request.getRequestDispatcher("static/jsp/homepage.jsp").forward(request, response);
 		}else{
 			request.getSession().setAttribute("loginStatus", "false");
-			request.getRequestDispatcher("login.html").forward(request, response);
+			
+			/*
+			 * 返回json
+			 */
+			/*
+			String jsonStr = "{loginStatus:false,message:\"用户名密码错误.\"}";
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out=response.getWriter();
+			out.println(jsonStr);
+			out.flush();
+			out.close();
+			*/
+			
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 		

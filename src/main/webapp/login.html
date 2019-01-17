@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,10 +30,17 @@
 </script>
 
 <body>
-
-
-
-
+<script language="JavaScript">
+	alert("11");
+	var islogin = "";
+	islogin = "<%=session.getAttribute("loginStatus")%>"; 
+	
+	if("" == islogin){
+		alert("登录失败的");
+	}else{
+		alert("登录失败的2");
+	}
+</script>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth">
@@ -60,7 +68,7 @@
               		<tr>
               		 	<div class="mt-3">
                 			<button type="submit" class="btn btn-gradient-primary mr-2">SIGN IN</button>
-                   			<button class="btn btn-light" style="float:right;">Cancel</button>
+                   			<button type="reset" class="btn btn-light" style="float:right;">Cancel</button>
                 		</div>
               		</tr>
               	</table>
