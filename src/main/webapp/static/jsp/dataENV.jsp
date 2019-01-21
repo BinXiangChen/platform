@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page import="com.data.envdata" import="java.util.*" language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>首页</title>
+  <title>环境数据</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="static/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="static/vendors/css/vendor.bundle.base.css">
@@ -17,6 +17,23 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="static/images/favicon.png" />
 </head>
+
+<script language="JavaScript">
+	function delEnv(id) {
+		var status = confirm("确定删除吗？");
+		
+		if(status == true){
+			window.location.href="/platform/envdata?id=" + id;
+		}
+		
+		<%
+			session.setAttribute("isDelEnv", "true");
+		%>
+    }
+	
+</script>
+
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -182,8 +199,68 @@
         <div class="content-wrapper">
           <div class="row">
           
+          <!-- 处理环境数据信息  -->
+          <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">环境配置</h4>
+                  
+                  <div class="template-demo">
+                  	<button type="button" class="btn btn-outline-dark btn-fw" name="addENV" onclick="javascrtpt:window.location.href='static/jsp/dataENVadd.jsp'">新增环境变量</button>
+                  </div>
+                  <p class="card-description"></p>
+                  
+                  <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th style="DISPLAY:none">id</th>
+                        <th>变量名</th>
+                        <th>归属者</th>
+                        <th>环境</th>
+                        <th>值</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+					<%
+                    List<envdata> envdata_now = (List<envdata>)session.getAttribute("envdatanow");
+                    int i = 0;
+                    
+                    for(; i < envdata_now.size(); i++){
+                    	String id = envdata_now.get(i).getId();
+                    	String variable = envdata_now.get(i).getVariable();
+                    	String owner = envdata_now.get(i).getOwner();
+                    	String env = envdata_now.get(i).getEnv();
+                    	String value = envdata_now.get(i).getValue();
+                    	
+                    	String temp_i = String.valueOf(i+1);
+                    %>
+                      <tr>
+	                        <td><%out.write(temp_i); %></td>
+	                        <td style="DISPLAY:none"><%out.write(id); %></td>
+	                        <td><%out.write(variable); %></td>
+	                        <td><%out.write(owner); %></td>
+	                        <td><%out.write(env); %></td>
+	                        <td><%out.write(value); %></td>
+	                        <td nowrap="nowrap">
+	                        	<a class="nav-link" onclick="javascrtpt:window.location.href='static/jsp/dataENVEdit.jsp?id=<%=id%>&variable=<%=variable%>&env=<%=env%>&value=<%=value%>'">编辑</a>
+	                        	<a class="nav-link" onclick="delEnv(<%=id%>);">刪除</a>
+	                        </td>
+                      </tr>
+                    <%
+                    }
+                    %>	
+
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           
-          内容部分
+          
           
           
            </div>

@@ -60,31 +60,24 @@
   </servlet-mapping>
   
   
-   <servlet>
-   		<servlet-name>Login</servlet-name>
-   		<servlet-class>com.test.Login</servlet-class>
-   </servlet>
-     <servlet-mapping>
-         <servlet-name>Login</servlet-name>
-         <url-pattern>/login</url-pattern>
-     </servlet-mapping>
   
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.test.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    <servlet>
+    <servlet-name>envdata</servlet-name>
+    <servlet-class>com.test.DataENV</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>envdata</servlet-name>
+    <url-pattern>/envdata</url-pattern>
+  </servlet-mapping>
   
   
   
